@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import Loader from 'react-loaders'
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
+import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet'
 import { useRef } from 'react'
 import emailjs from '@emailjs/browser'
 import AnimatedLetters from '../AnimatedLetters'
@@ -32,6 +32,26 @@ const Contact = () => {
       )
   }
 
+  function LocationMarker() {
+    const [position, setPosition] = useState(null)
+    const map = useMapEvents({
+      click() {
+        map.locate()
+      },
+      locationfound(e) {
+        setPosition(e.latlng)
+        map.flyTo(e.latlng, map.getZoom())
+      },
+    })
+  
+    return position === null ? null : (
+      <Marker position={position}>
+        <Popup>You are here</Popup>
+      </Marker>
+    )
+  }
+  
+
   return (
     <>
       <div className="container contact-page">
@@ -44,7 +64,7 @@ const Contact = () => {
             />
           </h1>
           <p>
-            I am interested in freelance opportunities - especially on ambitious
+            I am interested in freelance opportunities  especially on ambitious
             or large projects. However, if you have any other requests or
             questions, don't hesitate to contact me using below form either.
           </p>
@@ -92,7 +112,7 @@ const Contact = () => {
           <span>oyetundetobi1994@gmail.com</span>
         </div>
         <div className="map-wrap">
-          <MapContainer center={[44.96366, 19.61045]} zoom={13}>
+          <MapContainer center={[7.1475, 3.3619]} zoom={13}>
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
             <Marker position={[44.96366, 19.61045]}>
               <Popup>Doetek lives here, come over for a cup of coffee :</Popup>
