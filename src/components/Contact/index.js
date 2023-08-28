@@ -1,6 +1,12 @@
 import { useEffect, useState } from 'react'
 import Loader from 'react-loaders'
-import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from 'react-leaflet'
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  Popup,
+  useMapEvents,
+} from 'react-leaflet'
 import { useRef } from 'react'
 import emailjs from '@emailjs/browser'
 import AnimatedLetters from '../AnimatedLetters'
@@ -11,23 +17,43 @@ const Contact = () => {
   const form = useRef()
 
   useEffect(() => {
-     setTimeout(() => {
+    setTimeout(() => {
       setLetterClass('text-animate-hover')
     }, 3000)
   }, [])
+
+  // const sendEmail = (e) => {
+  //   e.preventDefault()
+
+  //   emailjs
+  //     .sendForm('gmail', 'template_fd5stwp', form.current, 'service_8wyh057')
+  //     .then(
+  //       () => {
+  //         alert('Message successfully sent!')
+  //         window.location.reload(false)
+  //       },
+  //       () => {
+  //         alert('Failed to send the message, please try again')
+  //       }
+  //     )
+  // }
 
   const sendEmail = (e) => {
     e.preventDefault()
 
     emailjs
-      .sendForm('gmail', 'template_YeJhZkgb', form.current, 'your-token')
+      .sendForm(
+        'service_8wyh057',
+        'template_fd5stwp',
+        form.current,
+        'zvDDndrAWSLOds7Sd'
+      )
       .then(
-        () => {
-          alert('Message successfully sent!')
-          window.location.reload(false)
+        (result) => {
+          console.log(result.text)
         },
-        () => {
-          alert('Failed to send the message, please try again')
+        (error) => {
+          console.log(error.text)
         }
       )
   }
@@ -43,14 +69,14 @@ const Contact = () => {
         map.flyTo(e.latlng, map.getZoom())
       },
     })
-  
+
     return position === null ? null : (
       <Marker position={position}>
         <Popup>You are here</Popup>
       </Marker>
     )
   }
-  
+
   function LocationMarker() {
     const [position, setPosition] = useState(null)
     const map = useMapEvents({
@@ -62,14 +88,13 @@ const Contact = () => {
         map.flyTo(e.latlng, map.getZoom())
       },
     })
-  
+
     return position === null ? null : (
       <Marker position={position}>
         <Popup>You are here</Popup>
       </Marker>
     )
   }
-  
 
   return (
     <>
@@ -83,7 +108,7 @@ const Contact = () => {
             />
           </h1>
           <p>
-            I am interested in freelance opportunities  especially on ambitious
+            I am interested in freelance opportunities especially on ambitious
             or large projects. However, if you have any other requests or
             questions, don't hesitate to contact me using below form either.
           </p>
@@ -131,23 +156,20 @@ const Contact = () => {
           <span>oyetundetobi1994@gmail.com</span>
         </div>
         <div className="map-wraper">
-          {/* <MapContainer center={[7.1475, 3.3619]} zoom={13}>
-            <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-            <Marker position={[44.96366, 19.61045]}>
-              <Popup>Doetek lives here, come over for a cup of coffee :</Popup>
-            </Marker>
-          </MapContainer> */}
-
-<MapContainer
-    center={{ lat: 7.1475, lng: 3.3619 }}
-    zoom={13}
-    scrollWheelZoom={false}>
-    <TileLayer
-      attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-    />
-    <LocationMarker />
-  </MapContainer>,
+          render(
+          <MapContainer
+            className="MapContainer"
+            center={[7.1475, 3.3619]}
+            zoom={13}
+            scrollWheelZoom={false}
+          >
+            <TileLayer
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+            <LocationMarker />
+          </MapContainer>
+          , )
         </div>
       </div>
       <Loader type="pacman" />
