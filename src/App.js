@@ -7,8 +7,11 @@ import Layout from './components/Layout'
 // import Dashboard from './components/Dashboard'
 import './App.scss'
 import PageNotFound from './NotFound'
+import useTitle from './useTitle'
+
 
 function App() {
+  useTitle('doetek');
   return (
     <>
       <Routes>

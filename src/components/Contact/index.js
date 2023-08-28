@@ -51,6 +51,25 @@ const Contact = () => {
     )
   }
   
+  function LocationMarker() {
+    const [position, setPosition] = useState(null)
+    const map = useMapEvents({
+      click() {
+        map.locate()
+      },
+      locationfound(e) {
+        setPosition(e.latlng)
+        map.flyTo(e.latlng, map.getZoom())
+      },
+    })
+  
+    return position === null ? null : (
+      <Marker position={position}>
+        <Popup>You are here</Popup>
+      </Marker>
+    )
+  }
+  
 
   return (
     <>
@@ -111,13 +130,24 @@ const Contact = () => {
           <br />
           <span>oyetundetobi1994@gmail.com</span>
         </div>
-        <div className="map-wrap">
-          <MapContainer center={[7.1475, 3.3619]} zoom={13}>
+        <div className="map-wraper">
+          {/* <MapContainer center={[7.1475, 3.3619]} zoom={13}>
             <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
             <Marker position={[44.96366, 19.61045]}>
               <Popup>Doetek lives here, come over for a cup of coffee :</Popup>
             </Marker>
-          </MapContainer>
+          </MapContainer> */}
+
+<MapContainer
+    center={{ lat: 7.1475, lng: 3.3619 }}
+    zoom={13}
+    scrollWheelZoom={false}>
+    <TileLayer
+      attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+    />
+    <LocationMarker />
+  </MapContainer>,
         </div>
       </div>
       <Loader type="pacman" />
