@@ -4,29 +4,48 @@ import AnimatedLetters from '../AnimatedLetters'
 import './index.scss'
 import { getDocs, collection } from 'firebase/firestore'
 import { db } from '../../firebase'
+import firebase from 'firebase/app'
 
 const Portfolio = () => {
   const [letterClass, setLetterClass] = useState('text-animate')
   const [portfolio, setPortfolio] = useState([])
 
+  //   useEffect(() => {
+  //     const timer = setTimeout(() => {
+  //       setLetterClass('text-animate-hover')
+  //     }, 3000)
+
+  //     return () => {
+
+  //       clearTimeout(timer)
+  //     }
+  //   })
   useEffect(() => {
     const timer = setTimeout(() => {
       setLetterClass('text-animate-hover')
     }, 3000)
 
     return () => {
-        
       clearTimeout(timer)
     }
-  })
+  }, [letterClass])
 
   useEffect(() => {
     getPortfolio()
   }, [])
 
+  //   const getPortfolio = async () => {
+  //     const querySnapshot = await getDocs(collection(db, 'portfolio'))
+  //     setPortfolio(querySnapshot.docs.map((doc) => doc.data()))
+  //   }
+
   const getPortfolio = async () => {
-    const querySnapshot = await getDocs(collection(db, 'portfolio'))
-    setPortfolio(querySnapshot.docs.map((doc) => doc.data()))
+    try {
+      const querySnapshot = await getDocs(collection(db, 'portfolio'))
+      setPortfolio(querySnapshot.docs.map((doc) => doc.data()))
+    } catch (error) {
+      console.error('Error fetching portfolio:', error)
+    }
   }
 
   const renderPortfolio = (portfolio) => {
