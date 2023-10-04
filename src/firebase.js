@@ -6,12 +6,7 @@ import { getFirestore } from 'firebase/firestore/lite';
 import 'firebase/firestore';
 
 const firebaseConfig = {
-    // apiKey: "AIzaSyC0-EQaU9lZzPmQO5TF54zp9yxRvj1n-MI",
-    // authDomain: "portfolio-f6bd8.firebaseapp.com",
-    // projectId: "portfolio-f6bd8",
-    // storageBucket: "portfolio-f6bd8.appspot.com",
-    // messagingSenderId: "214026105037",
-    // appId: "1:214026105037:web:ae15fa8942933b1f4b3984"
+  
     apiKey: "AIzaSyClqokU8c88n1pon0mbUQ9zf7jwyNNxC5Y",
     authDomain: "react-portfolio-dashbord-2b41e.firebaseapp.com",
     projectId: "react-portfolio-dashbord-2b41e",
