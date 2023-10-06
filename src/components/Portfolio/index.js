@@ -1,25 +1,17 @@
+
 import React, { useEffect, useState } from 'react'
 import Loader from 'react-loaders'
 import AnimatedLetters from '../AnimatedLetters'
+import Axios from 'axios' // Import axios
 import './index.scss'
-import { getDocs, collection } from 'firebase/firestore'
-import { db } from '../../firebase'
-import firebase from 'firebase/app'
+
+Axios.defaults.baseURL =
+  process.env.REACT_APP_SERVER_DOMAIN || 'http://localhost:5000'
 
 const Portfolio = () => {
   const [letterClass, setLetterClass] = useState('text-animate')
   const [portfolio, setPortfolio] = useState([])
 
-  //   useEffect(() => {
-  //     const timer = setTimeout(() => {
-  //       setLetterClass('text-animate-hover')
-  //     }, 3000)
-
-  //     return () => {
-
-  //       clearTimeout(timer)
-  //     }
-  //   })
   useEffect(() => {
     const timer = setTimeout(() => {
       setLetterClass('text-animate-hover')
@@ -34,17 +26,18 @@ const Portfolio = () => {
     getPortfolio()
   }, [])
 
-  //   const getPortfolio = async () => {
-  //     const querySnapshot = await getDocs(collection(db, 'portfolio'))
-  //     setPortfolio(querySnapshot.docs.map((doc) => doc.data()))
-  //   }
-
   const getPortfolio = async () => {
     try {
-      const querySnapshot = await getDocs(collection(db, 'portfolio'))
-      setPortfolio(querySnapshot.docs.map((doc) => doc.data()))
+      const response = await Axios.get('/api/portfolios') // Using axios here
+      if (response.status === 200) {
+        const data = response.data
+        console.log(data);
+        setPortfolio(data)
+      } else {
+        console.error('Failed to fetch portfolio items')
+      }
     } catch (error) {
-      console.error('Error fetching portfolio:', error)
+      console.error('Error fetching portfolio items:', error)
     }
   }
 

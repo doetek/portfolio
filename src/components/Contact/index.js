@@ -1,41 +1,48 @@
-import { useEffect, useState } from 'react'
-import Loader from 'react-loaders'
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
-import { useRef } from 'react'
-import emailjs from '@emailjs/browser'
-import AnimatedLetters from '../AnimatedLetters'
-import './index.scss'
+
+import { useEffect, useState } from 'react';
+import Loader from 'react-loaders';
+import { useRef } from 'react';
+import emailjs from '@emailjs/browser';
+import AnimatedLetters from '../AnimatedLetters';
+import './index.scss';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Contact = () => {
-    const [letterClass, setLetterClass] = useState('text-animate')
-    const form = useRef()
-  
-    useEffect(() => {
-      setTimeout(() => {
-        setLetterClass('text-animate-hover')
-      }, 3000)
-    }, [])
-  
-   
-    const sendEmail = (e) => {
-      e.preventDefault()
-  
-      emailjs
-        .sendForm(
-          'service_8wyh057',
-          'template_fd5stwp',
-          form.current,
-          'zvDDndrAWSLOds7Sd'
-        )
-        .then(
-          (result) => {
-            console.log(result.text)
-          },
-          (error) => {
-            console.log(error.text)
-          }
-        )
-    }
+  const [letterClass, setLetterClass] = useState('text-animate');
+  const form = useRef();
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLetterClass('text-animate-hover');
+    }, 3000);
+  }, []);
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs
+      .sendForm(
+        'service_8wyh057',
+        'template_fd5stwp',
+        form.current,
+        'zvDDndrAWSLOds7Sd'
+      )
+      .then(
+        (result) => {
+          console.log(result.text);
+          toast.success('Email sent successfully!');
+          // Refresh the page after 30 seconds
+          setTimeout(() => {
+            window.location.reload();
+          }, 5000);
+        },
+        (error) => {
+          console.log(error.text);
+          toast.error('Failed to send email.');
+        }
+      );
+  };
 
   return (
     <>
@@ -49,9 +56,9 @@ const Contact = () => {
             />
           </h1>
           <p>
-            I am interested in freelance opportunities - especially on ambitious
+            I am interested in freelance opportunities especially on ambitious
             or large projects. However, if you have any other requests or
-            questions, don't hesitate to contact me using below form either.
+            questions, don't hesitate to contact me using the form below.
           </p>
           <div className="contact-form">
             <form ref={form} onSubmit={sendEmail}>
@@ -89,28 +96,11 @@ const Contact = () => {
             </form>
           </div>
         </div>
-        <div className="info-map">
-          Slobodan Gajić,
-          <br />
-          Serbia,
-          <br />
-          Branka RadiČevića 19, 22000 <br />
-          Sremska Mitrovica <br />
-          <br />
-          <span>freelancerslobodan@gmail.com</span>
-        </div>
-        <div className="map-wrap">
-          <MapContainer center={[44.96366, 19.61045]} zoom={13}>
-            <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-            <Marker position={[44.96366, 19.61045]}>
-              <Popup>Sloba lives here, come over for a cup of coffee :)</Popup>
-            </Marker>
-          </MapContainer>
-        </div>
       </div>
       <Loader type="pacman" />
+      <ToastContainer />
     </>
-  )
-}
+  );
+};
 
-export default Contact
+export default Contact;
