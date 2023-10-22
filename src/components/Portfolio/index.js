@@ -31,7 +31,7 @@ const Portfolio = () => {
       const response = await Axios.get('/api/portfolios') // Using axios here
       if (response.status === 200) {
         const data = response.data
-        console.log(data);
+        // console.log(data);
         setPortfolio(data)
       } else {
         console.error('Failed to fetch portfolio items')
