@@ -119,7 +119,6 @@
 //   }
 // }
 
-
 .portfolio-page {
   padding-left: 100px;
   padding-right: 50px;
@@ -137,7 +136,6 @@
     display: flex;
     gap: 19px;
     flex-wrap: wrap;
-  
   }
 
   .image-box {
@@ -168,46 +166,42 @@
         rgba(0, 0, 0, 0.2) 0,
         rgba(0, 0, 0, 1)
       );
-      
-      
-      h2.title { /* Changed p to h2 for better SEO */
-        font-size:1.5em; /* Increased font size */
-        font-weight:bold; /* Made text bold */
-        color:#ffd700; /* Made text color white */
-        margin-bottom:10px; /* Added some margin at the bottom */
+
+      h2.title {
+        /* Changed p to h2 for better SEO */
+        font-size: 1.5em; /* Increased font size */
+        font-weight: bold; /* Made text bold */
+        color: #ffd700; /* Made text color white */
+        margin-bottom: 10px; /* Added some margin at the bottom */
         background-color: black;
         text-align: center;
         width: 100%;
         padding: 0;
         margin: 0;
-      
-      
       }
 
-      
-      // p.description { 
+      // p.description {
       //   /* Changed h4 to p for semantic correctness */
       //   font-size:1em; /* Increased font size */
       //   line-height:1.5; /* Added line height for readability */
       //   color:white; /* Made text color white */
       //   margin-bottom:20px; /* Added some margin at the bottom */
       // }
-      
+
       .btn {
-        background-color:#ffd700; /* Changed button color for better visibility */
-        border:none; /* Removed border */
+        background-color: #ffd700; /* Changed button color for better visibility */
+        border: none; /* Removed border */
         border-radius: 4px;
-        color:black; /* Made text color black */
-        padding:10px; /* Added some padding */
-        text-align:center; /* Centered the text */
-        text-decoration:none; /* Removed underline */
-        display:inline-block; /* Made it inline */
-        font-size:16px; /* Increased font size */
+        color: black; /* Made text color black */
+        padding: 10px; /* Added some padding */
+        text-align: center; /* Centered the text */
+        text-decoration: none; /* Removed underline */
+        display: inline-block; /* Made it inline */
+        font-size: 16px; /* Increased font size */
         margin-top: 100px;
         margin-right: 20px;
-        cursor:pointer; /* Added cursor pointer */
+        cursor: pointer; /* Added cursor pointer */
         float: right;
-
       }
     }
   }
