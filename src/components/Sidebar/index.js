@@ -7,7 +7,8 @@ import {
   faLinkedin,
   faGithub,
   faYoutube,
-  faTwitter,
+  faXTwitter,
+ 
 } from '@fortawesome/free-brands-svg-icons'
 import {
   faHome,
@@ -26,7 +27,7 @@ const Sidebar = () => {
     <div className="nav-bar">
       <Link className="logo" to="/" onClick={() => setShowNav(false)}>
         <img src={Logo} alt="Logo" />
-        <img className="sub-logo" src={Sublogo} alt="slobodan" />
+        <img className="sub-logo" src={Sublogo} alt="doetek" />
       </Link>
       <nav className={showNav ? 'mobile-show' : ''}>
         <NavLink
@@ -116,8 +117,11 @@ const Sidebar = () => {
             rel="noreferrer"
             target="_blank"
           >
+
+            
             <FontAwesomeIcon
-              icon={faTwitter}
+              icon={faXTwitter}
+          
               color="#4d4d4e"
               className="anchor-icon"
             />
